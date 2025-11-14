@@ -2,6 +2,7 @@
 #include "Window.hpp"
 #include "Renderer.hpp"
 #include <memory>
+#include "Rect.hpp"
 
 namespace sk
 {

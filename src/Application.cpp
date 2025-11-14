@@ -11,6 +11,7 @@ void sk::Application::Run()
     initApplication();
     mRenderer.setClearColor({ 0.463f, 0.788f, 0.922f });
 
+    
     while (!mWindow->shouldClose())
     {
         mRenderer.clearFramebuffer();
