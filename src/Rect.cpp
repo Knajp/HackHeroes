@@ -1,19 +1,21 @@
 #include "Rect.hpp"
 
-sk::prim::Rect::Rect(glm::vec2 xy, glm::vec2 wh)
-	:origin(xy), extent(wh)
+sk::prim::Rect::Rect(glm::vec2 xy, glm::vec2 wh, glm::vec3 rgb)
+	:origin(xy), extent(wh), colour(rgb)
 {
 	generateVertices();
 }
 
 void sk::prim::Rect::generateVertices()
 {
+	float r = colour.r, g = colour.g, b = colour.b;
+
 	mVertices =
 	{
-		{origin.x, origin.y,					   1.0f, 0.0f, 0.0f},
-		{origin.x, origin.y + extent.y,			   1.0f, 0.0f, 0.0f},
-		{origin.x + extent.x, origin.y,		       1.0f, 0.0f, 0.0f},
-		{origin.x + extent.x, origin.y + extent.y, 1.0f, 0.0f, 0.0f}
+		{origin.x, origin.y,					   r,g,b},
+		{origin.x, origin.y + extent.y,			   r,g,b},
+		{origin.x + extent.x, origin.y,		       r,g,b},
+		{origin.x + extent.x, origin.y + extent.y, r,g,b}
 	};
 
 
@@ -42,5 +44,13 @@ void sk::prim::Rect::Draw()
 {
 	glBindVertexArray(VAO);
 
-	glDrawElements(GL_TRIANGLES, mIndices.size(), GL_UNSIGNED_SHORT, NULL);
+	glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mIndices.size()), GL_UNSIGNED_SHORT, NULL);
+}
+
+bool sk::prim::Rect::contains(const glm::vec2& p) const
+{
+	return  p.x >= origin.x &&
+		p.x <= origin.x + extent.x &&
+		p.y >= origin.y &&
+		p.y <= origin.y + extent.y;
 }

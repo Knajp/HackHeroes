@@ -5,6 +5,9 @@
 #include <glm/glm.hpp>
 #include <iostream>
 #include "Shader.hpp"
+#include <memory>
+#include "Logger.hpp"
+
 namespace sk
 {
 	namespace rutils
@@ -30,6 +33,9 @@ namespace sk
 	private:
 		Renderer() = default;
 		
-		sk::rutils::ShaderProgram mBasicProgram;
+		std::unique_ptr<sk::rutils::ShaderProgram> mBasicShaderProgram;
+#ifdef DEBUG
+		sk::debug::Logger mLogger = sk::debug::Logger("Render logger", spdlog::level::debug);
+#endif
 	};
 }

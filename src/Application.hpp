@@ -19,5 +19,7 @@ namespace sk
 	private:
 		std::unique_ptr<sk::Window> mWindow;
 		sk::Renderer& mRenderer = sk::Renderer::getInstance();
+
+		sk::debug::Logger mLogger = sk::debug::Logger("Main App Logger", spdlog::level::debug);
 	};
 }

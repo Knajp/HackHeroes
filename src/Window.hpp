@@ -2,7 +2,7 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
+#include "Logger.hpp"
 namespace sk
 {
 	class Window
@@ -24,5 +24,7 @@ namespace sk
 		std::string mTitle;
 
 		GLFWwindow* pWindow;
+
+		sk::debug::Logger mLogger = sk::debug::Logger("Window logger", spdlog::level::debug);
 	};
 }

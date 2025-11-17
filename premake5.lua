@@ -22,6 +22,7 @@ project "ScrollKiller"
    }
 
    defines { "GLM_FORCE_PACKED" }
+   buildoptions { "/utf-8" }
 
    filter "configurations:Debug"
       defines { "DEBUG" }
