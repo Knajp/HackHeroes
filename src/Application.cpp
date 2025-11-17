@@ -1,4 +1,6 @@
 #include "Application.hpp"
+#include "Renderer.hpp"
+#include "Rect.hpp"
 
 sk::Application& sk::Application::getInstance()
 {
@@ -10,11 +12,16 @@ void sk::Application::Run()
 {
     initApplication();
     mRenderer.setClearColor({ 0.463f, 0.788f, 0.922f });
+    mRenderer.createBasicShaderProgram();
 
-    
+    sk::prim::Rect rect({ -0.5f, -0.5f }, { 1.0f, 1.0f });
+
+    mRenderer.bindProgram(sk::rutils::PROGRAM_TYPE::BASIC);
     while (!mWindow->shouldClose())
     {
         mRenderer.clearFramebuffer();
+
+        rect.Draw();
 
         mWindow->pollEvents();
     }

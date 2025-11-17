@@ -20,6 +20,9 @@ project "ScrollKiller"
        "glfw3_mt.lib",
        "glfw3dll.lib"
    }
+
+   defines { "GLM_FORCE_PACKED" }
+
    filter "configurations:Debug"
       defines { "DEBUG" }
       symbols "On"

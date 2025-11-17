@@ -22,8 +22,9 @@ namespace sk
 			glm::vec2 extent;
 
 			std::vector<sk::util::Vertex> mVertices;
-			
-			GLuint VAO, VBO;
+			std::vector<uint16_t> mIndices{0, 1, 2,	2, 3, 1};
+
+			GLuint VAO, VBO, EBO;
 		};
 	}
 }
