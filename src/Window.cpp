@@ -1,4 +1,5 @@
 #include "Window.hpp"
+#include <spd/stb_image.h>
 
 static void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
@@ -7,17 +8,6 @@ static void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 sk::Window::Window(uint16_t width, uint16_t height, const std::string name)
 	:mWidth(width), mHeight(height), mTitle(name)
 {
-#ifdef DEBUG
-	if (glfwInit() == GLFW_TRUE)
-		mLogger.info("Initialized GLFW!");
-	else
-	{
-		mLogger.critical("Failed to initalize GLFW!");
-		throw std::runtime_error("Failed to init GLFW!");
-	}
-#else
-	glfwInit();
-#endif
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -34,6 +24,23 @@ sk::Window::Window(uint16_t width, uint16_t height, const std::string name)
 #endif
 	glfwMakeContextCurrent(pWindow);
 	glfwSetFramebufferSizeCallback(pWindow, framebufferSizeCallback);
+
+	int iwidth, iheight, ichannels;
+	unsigned char* pixels = stbi_load("txt/logo.png", &iwidth, &iheight, &ichannels, 4);
+
+#ifdef DEBUG
+	if (!pixels)
+		mLogger.error("Failed to load app logo!");
+	else mLogger.info("Loaded app logo.");
+#endif
+	GLFWimage image;
+	image.width = iwidth;
+	image.height = iheight;
+	image.pixels = pixels;
+
+	glfwSetWindowIcon(pWindow, 1, &image);
+
+	stbi_image_free(pixels);
 #ifdef DEBUG
 	mLogger.trace("Finished window creation.");
 #endif
@@ -52,6 +59,21 @@ void sk::Window::pollEvents()
 	glfwPollEvents();
 	glfwSwapBuffers(pWindow);
 }
+
+bool sk::Window::init()
+{
+	return glfwInit();
+}
+
+glm::ivec2 sk::Window::getScreenExtent()
+{
+	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+	const GLFWvidmode* videoMode = glfwGetVideoMode(monitor);
+
+	return { videoMode->width, videoMode->height };
+}
+
+
 
 sk::Window::~Window()
 {

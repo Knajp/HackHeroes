@@ -31,7 +31,25 @@ void sk::Application::Run()
 
 void sk::Application::initApplication()
 {
+#ifdef DEBUG
+    if (sk::Window::init() == GLFW_TRUE)
+        mLogger.info("Initialized GLFW!");
+    else
+    {
+        mLogger.critical("Failed to initalize GLFW!");
+        throw std::runtime_error("Failed to init GLFW!");
+    }
+#else
+    sk::Window::init();
+#endif
+
+    std::string windowName;
+#ifdef DEBUG
     mLogger.debug("Hello, World!");
-    mWindow = std::make_unique<sk::Window>(800, 800, "ScrollKiller v0.1");
+    windowName = "EduScroll v0.2 DEBUG";
+#else
+    windowName = "EduScroll v0.2";
+#endif
+    mWindow = std::make_unique<sk::Window>(sk::Window::getScreenExtent().x / 3, sk::Window::getScreenExtent().y, windowName);
     mRenderer.initRenderer();
 }

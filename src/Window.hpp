@@ -2,6 +2,7 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 #include "Logger.hpp"
 namespace sk
 {
@@ -15,6 +16,9 @@ namespace sk
 
 		void pollEvents();
 
+		static bool init();
+
+		static glm::ivec2 getScreenExtent();
 
 		~Window(); //RAII destructor
 	private:
