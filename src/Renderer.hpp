@@ -30,6 +30,7 @@ namespace sk
 		void createBasicShaderProgram();
 
 		void bindProgram(sk::rutils::PROGRAM_TYPE type);
+		void setViewport(int x, int y, int w, int h);
 	private:
 		Renderer() = default;
 		

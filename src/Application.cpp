@@ -14,7 +14,8 @@ void sk::Application::Run()
     mRenderer.setClearColor({ 0.463f, 0.788f, 0.922f });
     mRenderer.createBasicShaderProgram();
 
-    sk::ui::GUIelement topBar({ -1.0f, 0.8f }, { 2.0f, 0.2f }, sk::ui::COLOUR_LIGHTBLUE);
+    sk::ui::GUIelement topBar({ -1.0f, 0.7f }, { 2.0f, 0.3f }, sk::ui::COLOUR_LIGHTBLUE);
+    topBar.createShadow(sk::ui::COLOUR_LIGHTBLUE, sk::ui::COLOUR_BACKGROUND, 0.05f);
 
     mRenderer.bindProgram(sk::rutils::PROGRAM_TYPE::BASIC);
     while (!mWindow->shouldClose())
@@ -42,7 +43,6 @@ void sk::Application::initApplication()
 #else
     sk::Window::init();
 #endif
-
     std::string windowName;
 #ifdef DEBUG
     mLogger.debug("Hello, World!");
@@ -52,4 +52,5 @@ void sk::Application::initApplication()
 #endif
     mWindow = std::make_unique<sk::Window>(sk::Window::getScreenExtent().x / 3, sk::Window::getScreenExtent().y, windowName);
     mRenderer.initRenderer();
+    mRenderer.setViewport(0, 0, sk::Window::getScreenExtent().x / 3, sk::Window::getScreenExtent().y);
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include "Rect.hpp"
+
 #include <functional>
 namespace sk
 {
@@ -20,6 +21,23 @@ namespace sk
 		const glm::vec3	COLOUR_LIGHTGREEN = { 0.518f, 0.922f, 0.773f };
 		const glm::vec3	COLOUR_MIDBLUE= { 0.188f, 0.247f, 0.941f };
 
+		class Shadow
+		{
+		public:
+			Shadow() = default;
+			Shadow(glm::vec3 topColor, glm::vec3 bottomColor, glm::vec2 origin, glm::vec2 extent);
+
+			void createShadow() = delete;
+
+			void Draw();
+
+		private:
+			std::vector<sk::util::Vertex> mVertices;
+			std::vector<uint16_t> mIndices = { 0,1,2,2,3,1 };
+
+			GLuint VAO, VBO, EBO;
+		};
+
 		class GUIelement
 		{
 		public:
@@ -28,7 +46,12 @@ namespace sk
 
 			void Draw();
 
+			void createShadow(glm::vec3 topColor, glm::vec3 bottomColor, float shadowHeight);
+
 			std::vector<GUIelement> children;
+
+			sk::ui::Shadow mShadow;
+			bool hasShadow = false;
 		protected:
 			sk::prim::Rect mRect;
 		};
@@ -43,5 +66,7 @@ namespace sk
 		private:
 			std::function<void()> onClick;
 		};
+		
+		
 	}
 }

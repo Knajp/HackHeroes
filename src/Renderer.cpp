@@ -67,3 +67,8 @@ void sk::Renderer::bindProgram(sk::rutils::PROGRAM_TYPE type)
 		break;
 	}
 }
+
+void sk::Renderer::setViewport(int x, int y, int w, int h)
+{
+	glViewport(x, y, w, h);
+}

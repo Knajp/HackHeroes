@@ -45,6 +45,7 @@ void sk::prim::Rect::Draw()
 	glBindVertexArray(VAO);
 
 	glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mIndices.size()), GL_UNSIGNED_SHORT, NULL);
+	
 }
 
 bool sk::prim::Rect::contains(const glm::vec2& p) const

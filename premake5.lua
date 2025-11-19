@@ -21,7 +21,7 @@ project "ScrollKiller"
        "glfw3dll.lib"
    }
 
-   defines { "GLM_FORCE_PACKED", "STB_IMAGE_IMPLEMENTATION"}
+   defines { "GLM_FORCE_PACKED"}
    buildoptions { "/utf-8" }
 
    filter "configurations:Debug"

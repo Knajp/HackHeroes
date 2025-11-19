@@ -1,5 +1,4 @@
 #include "Window.hpp"
-#include <spd/stb_image.h>
 
 static void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 {

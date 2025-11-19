@@ -18,9 +18,11 @@ namespace sk
 
 			void Draw();
 			bool contains(const glm::vec2& p) const;
-		private:
+
 			glm::vec2 origin;
 			glm::vec2 extent;
+		private:
+			
 			glm::vec3 colour;
 
 			std::vector<sk::util::Vertex> mVertices;
