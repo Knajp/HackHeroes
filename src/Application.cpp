@@ -1,6 +1,7 @@
 #include "Application.hpp"
 #include "Renderer.hpp"
 #include "UserInterface.hpp"
+#include "Connection.hpp"
 
 sk::Application& sk::Application::getInstance()
 {
@@ -13,6 +14,8 @@ void sk::Application::Run()
     initApplication();
     mRenderer.setClearColor({ 0.463f, 0.788f, 0.922f });
     mRenderer.createBasicShaderProgram();
+
+    sk::server::Connection& serverCon = sk::server::Connection::getInstance();
 
     sk::ui::GUIelement topBar({ -1.0f, 0.7f }, { 2.0f, 0.3f }, sk::ui::COLOUR_LIGHTBLUE);
     topBar.createShadow(sk::ui::COLOUR_LIGHTBLUE, sk::ui::COLOUR_BACKGROUND, 0.05f);

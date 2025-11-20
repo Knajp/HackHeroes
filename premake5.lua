@@ -18,11 +18,16 @@ project "ScrollKiller"
    links {
        "glfw3.lib",
        "glfw3_mt.lib",
-       "glfw3dll.lib"
+       "glfw3dll.lib",
+       "libcurl_imp.lib"
    }
 
    defines { "GLM_FORCE_PACKED"}
    buildoptions { "/utf-8" }
+
+   postbuildcommands {
+      "{COPY} vendor/bin/curl/libcurl.dll %{cfg.targetdir}"
+   }
 
    filter "configurations:Debug"
       defines { "DEBUG" }
